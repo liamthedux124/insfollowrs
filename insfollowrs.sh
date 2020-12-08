@@ -21,10 +21,8 @@ echo -e "\e[1;91m  ║ \e[1;92m│ │ ││   \e[1;91m║   \e[1;92m│  │�
 echo -e "\e[1;91m  ║ \e[1;92m│ │ │└──┐\e[1;91m╠═╣ \e[1;92m│  ││   │   │  ││ │ │"
 echo -e "\e[1;91m  ║ \e[1;92m┘ └─┘└──┘\e[1;91m║   \e[1;92m└──┘┴──┘┴──┘└──┘└─┴─┘"
 echo -e "\e[1;91m ═╩═\e[1;92m         \e[1;91m╩"
-echo ""
-echo -e "\e[1;91m [+] YouTube: \e[1;92mTermuxProfessorYT"
-echo -e "\e[1;91m [+] Github: \e[1;92mtermuxprofessor"
-echo -e "\e[1;91m [+] Instagram: \e[1;92mtermuxprofessor\e[1;97r"
+echo -e "\e[1;91m [+] Github: \e[1;92malfa348"
+echo -e "\e[1;91m [+] Instagram: \e[1;92mMrjaat_official\e[1;97r"
 echo ""
 }
 login_user() {
@@ -97,16 +95,6 @@ for celeb in $(cat celeb_id); do
 data='{"_uuid":"'$guid'", "_uid":"'$username_id'", "user_id":"'$celeb'", "_csrftoken":"'$var2'"}'
 hmac=$(echo -n "$data" | openssl dgst -sha256 -hmac "${ig_sig}" | cut -d " " -f2)
 printf "\e[1;31m[\e[0m\e[1;77m+\e[0m\e[1;31m]\e[0m\e[1;93m Trying to follow celebgram %s ..." $celeb
-check_follow=$(curl -s -L -b cookie.$user -d "ig_sig_key_version=4&signed_body=$hmac.$data" -s --user-agent 'User-Agent: "Instagram 10.26.0 Android (18/4.3; 320dpi; 720x1280; Xiaomi; HM 1SW; armani; qcom; en_US)"' -w "\n%{http_code}\n" -H "$header" "https://i.instagram.com/api/v1/friendships/create/$celeb/" | grep -o '"following": true')
-if [[ $check_follow == "" ]]; then
-exit 1
-else
-printf "\e[1;92mOK\e[0m\n"
-fi
-sleep 3
-done
-printf "\e[1;31m[\e[0m\e[1;77m+\e[0m\e[1;31m]\e[0m\e[1;77m Sleeping 60 secs...\e[0m\n"
-sleep 60
 #unfollow
 for celeb in $(cat celeb_id); do
 data='{"_uuid":"'$guid'", "_uid":"'$username_id'", "user_id":"'$celeb'", "_csrftoken":"'$var2'"}'
